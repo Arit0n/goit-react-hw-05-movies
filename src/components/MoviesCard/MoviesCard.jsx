@@ -1,4 +1,6 @@
-import { Link, Outlet } from 'react-router-dom';
+import { Outlet } from 'react-router-dom';
+
+import { WrapBox, StyledLink } from './MoviesCard.styled';
 
 export const MoviesCard = ({ film }) => {
   const {
@@ -18,18 +20,25 @@ export const MoviesCard = ({ film }) => {
 
   return (
     <>
-      <img src={posterUrl} alt={original_title} />
-      <h3>
-        {original_title} ({releaseYear})
-      </h3>
-      <p>User score: {vote_average * 10}</p>
-      <h3>Overwiev</h3>
-      <p>{overview}</p>
-      <h3>Genres</h3>
-      <p>{genres?.map(genre => genre.name).join('  ')}</p>
+      <WrapBox>
+        {' '}
+        <img src={posterUrl} alt={original_title} />
+        <div>
+          {' '}
+          <h3>
+            {original_title} ({releaseYear})
+          </h3>
+          <p>User score: {vote_average * 10}</p>
+          <h3>Overwiev</h3>
+          <p>{overview}</p>
+          <h3>Genres</h3>
+          <p>{genres?.map(genre => genre.name).join('  ')}</p>
+        </div>
+      </WrapBox>
+
       <h3>Additional information</h3>
-      <Link to={'cast'}>Cast</Link>
-      <Link to={'reviews'}>Reviews</Link>
+      <StyledLink to={'cast'}>Cast</StyledLink>
+      <StyledLink to={'reviews'}>Reviews</StyledLink>
       <Outlet />
     </>
   );

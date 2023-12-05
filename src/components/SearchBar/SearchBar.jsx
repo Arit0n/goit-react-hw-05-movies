@@ -1,38 +1,46 @@
 import { getSearch } from 'API/api';
-import { Formik, Form } from 'formik';
+import { Formik } from 'formik';
 import { useState } from 'react';
 import { SearchList } from '../SerchList/SearchList';
 
 import { StyledField, Button, StyledForm } from './SearchBar.styled';
+import { useSearchParams } from 'react-router-dom';
 
 export const SearchBar = () => {
   const [searchFilm, setSearchFilm] = useState([]);
   const [loading, setLoading] = useState(false);
+  const [searchParams, setSearchParams] = useSearchParams();
+  const search = searchParams.get('search') ?? '';
 
-  const onSearchFilm = search => {
+  const onSearchFilm = searchFilm => {
+    searchParams.set('search', '');
+    setSearchParams(searchParams);
     setSearchFilm([]);
     async function getSearchFilm() {
       try {
         setLoading(true);
-        const searchList = await getSearch(search);
+        const searchList = await getSearch(searchFilm);
         setSearchFilm(searchList.results);
       } catch (error) {
       } finally {
         setLoading(false);
       }
     }
+    searchParams.set('search', searchFilm);
+    setSearchParams(searchParams);
     getSearchFilm();
   };
   return (
     <div>
       <Formik
         initialValues={{
-          search: '',
+          search: search,
         }}
         onSubmit={(values, actions) => {
           if (!values.search) {
             //   return notify;
           } else {
+            console.log(values.search);
             onSearchFilm(values.search);
             actions.resetForm();
           }
@@ -52,7 +60,7 @@ export const SearchBar = () => {
           </Button>
         </StyledForm>
       </Formik>
-      {<SearchList film={searchFilm} />}
+      <SearchList film={searchFilm} />
     </div>
   );
 };

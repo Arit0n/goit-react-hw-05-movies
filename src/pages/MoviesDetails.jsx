@@ -6,27 +6,21 @@ import { MoviesCard } from 'components/MoviesCard/MoviesCard';
 
 const MoviesDetails = () => {
   const { movieId } = useParams();
-  const [loading, setLoading] = useState(false);
   const [film, setFilm] = useState([]);
 
   const location = useLocation();
   const backLinkRef = useRef(location);
-  console.log(location);
+  console.log(backLinkRef);
 
   useEffect(() => {
-    async function getFilm() {
+    async function getFilm(id) {
       try {
         setFilm([]);
-        setLoading(true);
-        const searchFilm = await getFilmById(movieId);
-        console.log(searchFilm);
+        const searchFilm = await getFilmById(id);
         setFilm(searchFilm);
-      } catch (error) {
-      } finally {
-        setLoading(false);
-      }
+      } catch (error) {}
     }
-    getFilm();
+    getFilm(movieId);
   }, [movieId]);
 
   return (

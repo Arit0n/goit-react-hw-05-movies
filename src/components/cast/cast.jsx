@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 import { getFilmCastById } from 'API/api';
 import { List, Item, Text } from './cast.styled';
 
-export const Cast = () => {
+const Cast = () => {
   const { movieId } = useParams();
   const [castObject, setCastObject] = useState({});
   const { cast } = castObject;
@@ -20,7 +20,7 @@ export const Cast = () => {
       }
     }
     getCast();
-  }, []);
+  }, [movieId]);
 
   return (
     <section>
@@ -44,3 +44,5 @@ export const Cast = () => {
     </section>
   );
 };
+
+export default Cast;
