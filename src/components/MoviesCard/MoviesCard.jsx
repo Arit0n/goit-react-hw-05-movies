@@ -1,5 +1,3 @@
-import { Outlet } from 'react-router-dom';
-
 import {
   WrapBox,
   FilmTitle,
@@ -20,6 +18,7 @@ export const MoviesCard = ({ film }) => {
     vote_average,
     release_date,
   } = film;
+
   const dateFilm = new Date(release_date);
   const releaseYear = isNaN(dateFilm) ? 'Unknown' : dateFilm.getFullYear();
 
