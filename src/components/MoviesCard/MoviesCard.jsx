@@ -53,8 +53,6 @@ export const MoviesCard = ({ film }) => {
           </ListItem>
         </List>
       </StyledBox>
-
-      <Outlet />
     </>
   );
 };

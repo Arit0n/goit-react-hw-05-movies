@@ -3,7 +3,6 @@ import { StyledSection, List, ListItem, StyledLink } from './SearchList.styled';
 
 export const SearchList = ({ film }) => {
   const location = useLocation();
-
   return (
     <StyledSection>
       <List>

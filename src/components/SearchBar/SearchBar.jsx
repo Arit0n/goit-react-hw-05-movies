@@ -1,66 +1,25 @@
-import { getSearch } from 'API/api';
-import { Formik } from 'formik';
-import { useState } from 'react';
-import { SearchList } from '../SerchList/SearchList';
+import { toast } from 'react-hot-toast';
+import { StyledInput, Button, StyledForm } from './SearchBar.styled';
 
-import { StyledField, Button, StyledForm } from './SearchBar.styled';
-import { useSearchParams } from 'react-router-dom';
+export const SearchBar = ({ onSubmit }) => {
+  const handleSubmit = e => {
+    e.preventDefault();
 
-export const SearchBar = () => {
-  const [searchFilm, setSearchFilm] = useState([]);
-  const [loading, setLoading] = useState(false);
-  const [searchParams, setSearchParams] = useSearchParams();
-  const search = searchParams.get('search') ?? '';
+    const query = e.target.elements.query.value;
 
-  const onSearchFilm = searchFilm => {
-    searchParams.set('search', '');
-    setSearchParams(searchParams);
-    setSearchFilm([]);
-    async function getSearchFilm() {
-      try {
-        setLoading(true);
-        const searchList = await getSearch(searchFilm);
-        setSearchFilm(searchList.results);
-      } catch (error) {
-      } finally {
-        setLoading(false);
-      }
+    if (!query) {
+      toast.error('Please enter something');
+      return;
     }
-    searchParams.set('search', searchFilm);
-    setSearchParams(searchParams);
-    getSearchFilm();
+
+    onSubmit(query);
+    e.target.reset();
   };
+
   return (
-    <div>
-      <Formik
-        initialValues={{
-          search: search,
-        }}
-        onSubmit={(values, actions) => {
-          if (!values.search) {
-            //   return notify;
-          } else {
-            console.log(values.search);
-            onSearchFilm(values.search);
-            actions.resetForm();
-          }
-        }}
-      >
-        <StyledForm>
-          <StyledField
-            name="search"
-            id="search"
-            type="text"
-            autoСomplete="off"
-            autofocus
-            placeholder="Search films"
-          />
-          <Button type="submit" disabled={loading}>
-            Search
-          </Button>
-        </StyledForm>
-      </Formik>
-      <SearchList film={searchFilm} />
-    </div>
+    <StyledForm onSubmit={handleSubmit}>
+      <StyledInput name="query" type="text" placeholder="Search movies" />
+      <Button type="submit">Search</Button>
+    </StyledForm>
   );
 };
