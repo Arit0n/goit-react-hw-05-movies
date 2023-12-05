@@ -12,7 +12,6 @@ const MoviesDetails = () => {
 
   const location = useLocation();
   const backLinkRef = useRef(location);
-  console.log(backLinkRef);
 
   useEffect(() => {
     async function getFilm(id) {

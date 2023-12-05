@@ -30,10 +30,8 @@ export const MoviesCard = ({ film }) => {
   return (
     <>
       <WrapBox>
-        {' '}
         <img src={posterUrl} alt={original_title} />
         <div>
-          {' '}
           <FilmTitle>
             {original_title} ({releaseYear})
           </FilmTitle>

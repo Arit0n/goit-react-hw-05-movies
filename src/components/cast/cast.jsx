@@ -14,7 +14,6 @@ const Cast = () => {
       try {
         setCastObject({});
         const searchCast = await getFilmCastById(movieId);
-        console.log(searchCast);
         setCastObject(searchCast);
       } catch (error) {
         console.error('Error fetching cast:', error);

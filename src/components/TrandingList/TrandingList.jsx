@@ -1,3 +1,5 @@
+import { useLocation } from 'react-router-dom';
+
 import {
   StyledSection,
   List,
@@ -5,11 +7,10 @@ import {
   StyledLink,
   StyledHeader,
 } from 'components/TrandingList/TrandingList.styled';
-import { useLocation } from 'react-router-dom';
 
 export const TrandingList = ({ films }) => {
   const location = useLocation();
-  console.log(location);
+
   return (
     <StyledSection>
       <StyledHeader>Tranding today</StyledHeader>

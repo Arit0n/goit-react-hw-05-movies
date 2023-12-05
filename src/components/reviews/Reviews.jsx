@@ -20,7 +20,6 @@ const Reviews = () => {
       try {
         setReviews({});
         const searchReviews = await getFilmReviewsById(movieId);
-        console.log(searchReviews);
         setReviews(searchReviews);
       } catch (error) {
         console.error('Error fetching reviews:', error);
@@ -31,7 +30,6 @@ const Reviews = () => {
 
   return (
     <ReviewsSection>
-      {console.log('tyt')}
       <ReviewsHeader>Reviews</ReviewsHeader>
       {reviews.results && reviews.results.length ? (
         <List>
