@@ -35,7 +35,7 @@ export const MoviesCard = ({ film }) => {
           <FilmTitle>
             {original_title} ({releaseYear})
           </FilmTitle>
-          <CardText>User score: {vote_average * 10}</CardText>
+          <CardText>User score: {(vote_average * 10).toFixed(0)}%</CardText>
           <StyledHeaderCard>Overwiev</StyledHeaderCard>
           <CardText>{overview}</CardText>
           <StyledHeaderCard>Genres</StyledHeaderCard>
