@@ -1,7 +1,8 @@
 import { useParams } from 'react-router-dom';
 import { useState, useEffect } from 'react';
 import { getFilmCastById } from 'API/api';
-import { List, Item, Text } from './cast.styled';
+
+import { List, CastSection, CastHeader, Item, Text } from './cast.styled';
 
 const Cast = () => {
   const { movieId } = useParams();
@@ -23,10 +24,11 @@ const Cast = () => {
   }, [movieId]);
 
   return (
-    <section>
-      <List>
-        {cast &&
-          cast.map(item => (
+    <CastSection>
+      <CastHeader>Cast</CastHeader>
+      {cast && (
+        <List>
+          {cast.map(item => (
             <Item key={item.id}>
               <img
                 src={
@@ -40,8 +42,9 @@ const Cast = () => {
               <Text>{item.character}</Text>
             </Item>
           ))}
-      </List>
-    </section>
+        </List>
+      )}
+    </CastSection>
   );
 };
 

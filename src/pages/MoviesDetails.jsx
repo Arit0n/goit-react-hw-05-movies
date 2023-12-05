@@ -4,6 +4,8 @@ import { useEffect, useRef, useState, Suspense } from 'react';
 import { Loader } from 'components/Loader/Loader';
 import { MoviesCard } from 'components/MoviesCard/MoviesCard';
 
+import { StyledSection } from './MoviesDetails.styled';
+
 const MoviesDetails = () => {
   const { movieId } = useParams();
   const [film, setFilm] = useState([]);
@@ -24,7 +26,7 @@ const MoviesDetails = () => {
   }, [movieId]);
 
   return (
-    <section>
+    <StyledSection>
       <Link to={backLinkRef.current.state?.from ?? '/movies'}>
         <b>Back to movies</b>
       </Link>
@@ -34,7 +36,7 @@ const MoviesDetails = () => {
       <Suspense fallback={<Loader />}>
         <Outlet />
       </Suspense>
-    </section>
+    </StyledSection>
   );
 };
 

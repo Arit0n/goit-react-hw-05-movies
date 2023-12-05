@@ -1,7 +1,14 @@
 import { getFilmReviewsById } from 'API/api';
 import { useParams } from 'react-router-dom';
 import { useEffect, useState } from 'react';
-import { HeaderReviews, Item } from './Reviews.styled';
+import {
+  ReviewsHeader,
+  ReviewsSection,
+  TitleReviews,
+  List,
+  Item,
+  NotFoundReviews,
+} from './Reviews.styled';
 
 const Reviews = () => {
   const { movieId } = useParams();
@@ -23,20 +30,24 @@ const Reviews = () => {
   }, [movieId]);
 
   return (
-    <section>
-      <ul>
-        {results && results.length > 0 ? (
-          results.map(item => (
+    <ReviewsSection>
+      {console.log('tyt')}
+      <ReviewsHeader>Reviews</ReviewsHeader>
+      {reviews.results && reviews.results.length ? (
+        <List>
+          {results.map(item => (
             <Item key={item.id}>
-              <HeaderReviews>Author: {item.author}</HeaderReviews>
+              <TitleReviews>Author: {item.author}</TitleReviews>
               <p>{item.content}</p>
             </Item>
-          ))
-        ) : (
-          <p>Вибачайте, наразі відгуки недоступні для цього фільму.</p>
-        )}
-      </ul>
-    </section>
+          ))}
+        </List>
+      ) : (
+        <NotFoundReviews>
+          Вибачайте, наразі відгуки недоступні для цього фільму.
+        </NotFoundReviews>
+      )}
+    </ReviewsSection>
   );
 };
 export default Reviews;

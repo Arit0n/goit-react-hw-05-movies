@@ -24,8 +24,9 @@ img {
 a {
     text-decoration: none;
 }
-ul {
-padding: 0;}
 li {
 list-style: none}
+h1, h2, h3, h4, h5, h6, ol, p, ul {
+    margin: 0;
+    padding: 0;
 `;

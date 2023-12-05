@@ -1,6 +1,15 @@
 import { Outlet } from 'react-router-dom';
 
-import { WrapBox, StyledLink } from './MoviesCard.styled';
+import {
+  WrapBox,
+  FilmTitle,
+  CardText,
+  StyledHeaderCard,
+  List,
+  ListItem,
+  StyledLink,
+  StyledBox,
+} from './MoviesCard.styled';
 
 export const MoviesCard = ({ film }) => {
   const {
@@ -25,20 +34,28 @@ export const MoviesCard = ({ film }) => {
         <img src={posterUrl} alt={original_title} />
         <div>
           {' '}
-          <h3>
+          <FilmTitle>
             {original_title} ({releaseYear})
-          </h3>
-          <p>User score: {vote_average * 10}</p>
-          <h3>Overwiev</h3>
-          <p>{overview}</p>
-          <h3>Genres</h3>
-          <p>{genres?.map(genre => genre.name).join('  ')}</p>
+          </FilmTitle>
+          <CardText>User score: {vote_average * 10}</CardText>
+          <StyledHeaderCard>Overwiev</StyledHeaderCard>
+          <CardText>{overview}</CardText>
+          <StyledHeaderCard>Genres</StyledHeaderCard>
+          <CardText>{genres?.map(genre => genre.name).join('  ')}</CardText>
         </div>
       </WrapBox>
+      <StyledBox>
+        <h3>Additional information</h3>
+        <List>
+          <ListItem>
+            <StyledLink to={'cast'}>Cast</StyledLink>
+          </ListItem>
+          <ListItem>
+            <StyledLink to={'reviews'}>Reviews</StyledLink>
+          </ListItem>
+        </List>
+      </StyledBox>
 
-      <h3>Additional information</h3>
-      <StyledLink to={'cast'}>Cast</StyledLink>
-      <StyledLink to={'reviews'}>Reviews</StyledLink>
       <Outlet />
     </>
   );
